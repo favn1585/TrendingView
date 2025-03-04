@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.trending.view.ui.theme.TopicColorsDark
 import com.trending.view.ui.theme.TopicColorsLight
@@ -22,6 +23,7 @@ import kotlin.random.Random
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TrendingItemTopics(
+    style: TextStyle = MaterialTheme.typography.bodySmall,
     modifier: Modifier = Modifier,
     topics: List<String>
 ) {
@@ -32,7 +34,7 @@ fun TrendingItemTopics(
             Box(
                 modifier = Modifier.padding(end = 8.dp, bottom = 8.dp)
             ) {
-                TopicItem(it)
+                TopicItem(text = it, style = style)
             }
         }
     }
@@ -40,7 +42,8 @@ fun TrendingItemTopics(
 
 @Composable
 private fun TopicItem(
-    text: String
+    text: String,
+    style: TextStyle
 ) {
     val color = if (isSystemInDarkTheme()) {
         TopicColorsDark[Random.nextInt(TopicColorsDark.size)]
@@ -55,7 +58,7 @@ private fun TopicItem(
         Text(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp),
             color = MaterialTheme.colorScheme.onSecondary,
-            style = MaterialTheme.typography.bodySmall,
+            style = style,
             text = text
         )
     }

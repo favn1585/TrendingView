@@ -57,4 +57,7 @@ dependencies {
 
     // Timber
     implementation(libs.timber)
+
+    // Logging
+    implementation(libs.logging.interceptor)
 }

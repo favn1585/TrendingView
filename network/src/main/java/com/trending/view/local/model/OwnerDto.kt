@@ -8,8 +8,8 @@ import com.trending.view.domain.entity.Owner
 data class OwnerDto(
     @Json(name = "id")
     val id: Long,
-    @Json(name = "name")
-    val name: String?,
+    @Json(name = "login")
+    val login: String,
     @Json(name = "html_url")
     val htmlUrl: String,
     @Json(name = "avatar_url")
@@ -18,7 +18,7 @@ data class OwnerDto(
 
 fun OwnerDto.toDomain(): Owner = Owner(
     id = id,
-    name = name,
+    name = login,
     htmlUrl = htmlUrl,
     avatarUrl = avatarUrl
 )

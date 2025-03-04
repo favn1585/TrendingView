@@ -87,7 +87,10 @@ fun TrendingItem(
 
             if (repository.topics.isNotEmpty()) {
                 Spacer(Modifier.height(8.dp))
-                TrendingItemTopics(modifier = Modifier.fillMaxWidth(), topics = repository.topics)
+                TrendingItemTopics(
+                    modifier = Modifier.fillMaxWidth(),
+                    topics = repository.topics.take(4)
+                )
             }
 
             Spacer(Modifier.height(8.dp))

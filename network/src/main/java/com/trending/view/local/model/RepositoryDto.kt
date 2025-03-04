@@ -36,7 +36,7 @@ fun RepositoryDto.toDomain() = Repository(
     description = description.orEmpty(),
     forks = forksCount,
     issues = openIssuesCount,
-    topics = topics?.take(4) ?: emptyList(),
+    topics = topics ?: emptyList(),
     size = size,
     watchers = watchers
 )
