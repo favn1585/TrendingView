@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">TrendHub</string>
-    <string name="issues">Issues: %s</string>
-    <string name="watchers">Watchers: %s</string>
+    <string name="trending_repositories">Trending Repositories</string>
+    <string name="issues">Issue: %s</string>
+    <string name="watchers">Watch: %s</string>
     <string name="forks">Forks: %s</string>
-    <string name="stars">%s Stars!</string>
+    <string name="size">Size: %s</string>
 </resources>

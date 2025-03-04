@@ -13,6 +13,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -37,10 +38,12 @@ fun TrendingInfoItem(
                     shape = CircleShape
                 )
                 .padding(vertical = 4.dp)
-                .padding(start = 4.dp, end = 8.dp)
+                .padding(start = 8.dp, end = 8.dp)
         ) {
             Icon(
-                modifier = Modifier.size(24.dp),
+                modifier = Modifier
+                    .size(18.dp)
+                    .align(Alignment.CenterVertically),
                 tint = MaterialTheme.colorScheme.secondary,
                 contentDescription = null,
                 painter = painterResource(icon)
@@ -50,6 +53,7 @@ fun TrendingInfoItem(
 
             Text(
                 color = MaterialTheme.colorScheme.secondary,
+                fontWeight = FontWeight.Medium,
                 text = text
             )
         }

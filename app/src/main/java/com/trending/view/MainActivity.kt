@@ -4,49 +4,43 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.foundation.background
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.trending.view.ui.components.Loader
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.rememberNavController
+import com.google.accompanist.insets.ProvideWindowInsets
+import com.trending.view.navgation.NavigationCommand
+import com.trending.view.navgation.Navigator
+import com.trending.view.navgation.TrendingViewNavGraph
 import com.trending.view.ui.theme.TrendingViewTheme
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    @Inject
+    lateinit var navigator: Navigator
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         setContent {
+            val navController = rememberNavController()
+            navigator.bindNavController(navController)
+
             TrendingViewTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
+                ProvideWindowInsets {
+                    NavHost(
+                        navController = navController,
+                        startDestination = NavigationCommand.Trending.path(),
+                        builder = TrendingViewNavGraph,
+                        modifier = Modifier.background(MaterialTheme.colorScheme.background)
                     )
                 }
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-
-    Loader(isVisible = true)
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    TrendingViewTheme {
-        Greeting("Android")
     }
 }

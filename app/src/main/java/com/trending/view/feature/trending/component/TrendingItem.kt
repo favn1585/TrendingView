@@ -1,6 +1,7 @@
 package com.trending.view.feature.trending.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -12,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -19,11 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import coil3.compose.AsyncImage
+import coil.compose.AsyncImage
 import com.trending.view.R
 import com.trending.view.domain.entity.Repository
 import com.trending.view.ui.theme.TrendingViewTheme
@@ -33,21 +36,27 @@ import com.trending.view.util.preview.repository
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TrendingItem(
-    index: Long,
-    repository: Repository
+    index: Int,
+    repository: Repository,
+    onClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
             .fillMaxWidth()
-            .padding(16.dp)
+            .clickable { onClick() }
+            .padding(top = 16.dp)
     ) {
         Row {
             AsyncImage(
-                modifier = Modifier.size(32.dp),
+                modifier = Modifier
+                    .size(32.dp)
+                    .clip(CircleShape),
                 model = repository.owner.avatarUrl,
                 contentDescription = null
             )
+
+            Spacer(Modifier.width(8.dp))
 
             TrendingItemTitle(
                 modifier = Modifier.align(Alignment.CenterVertically),
@@ -63,9 +72,10 @@ fun TrendingItem(
             text = repository.description
         )
 
-        Spacer(Modifier.height(16.dp))
-
-        TrendingItemTopics(repository.topics)
+        if (repository.topics.isNotEmpty()) {
+            Spacer(Modifier.height(16.dp))
+            TrendingItemTopics(repository.topics)
+        }
 
         Spacer(Modifier.height(8.dp))
 
@@ -77,7 +87,7 @@ fun TrendingItem(
             repository.forks?.let {
                 TrendingInfoItem(
                     icon = R.drawable.ic_fork,
-                    text = stringResource(R.string.forks, it)
+                    text = it.toString()
                 )
             }
 
@@ -119,9 +129,13 @@ fun TrendingItem(
                 modifier = Modifier.align(Alignment.CenterVertically),
                 color = MaterialTheme.colorScheme.onBackground,
                 fontWeight = FontWeight.Medium,
-                text = stringResource(R.string.stars, repository.stars)
+                text = stringResource(R.string.size, repository.size)
             )
         }
+
+        Spacer(Modifier.width(16.dp))
+
+        HorizontalDivider(color = MaterialTheme.colorScheme.secondary, thickness = 1.dp)
     }
 }
 
@@ -130,7 +144,7 @@ fun TrendingItem(
 fun TrendingItemPreview() {
     TrendingViewTheme {
         TrendingItem(
-            index = 1L,
+            index = 1,
             repository = repository
         )
     }

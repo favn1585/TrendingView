@@ -30,8 +30,9 @@ val repository = Repository(
         "1",
         "#test",
     ),
-    stars = 15,
+    size = 15,
     issues = 10,
     watchers = 23,
-    forks = 12
+    forks = 12,
+    htmlUrl = "www.some.thing"
 )

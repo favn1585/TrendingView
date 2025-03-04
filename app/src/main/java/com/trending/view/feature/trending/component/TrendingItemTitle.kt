@@ -15,7 +15,7 @@ import com.trending.view.util.preview.repository
 @Composable
 fun TrendingItemTitle(
     modifier: Modifier = Modifier,
-    index: Long,
+    index: Int,
     title: String
 ) {
     val annotatedString = buildAnnotatedString {
@@ -44,7 +44,7 @@ fun TrendingItemTitle(
 private fun TrendingItemTitlePreview() {
     TrendingViewTheme {
         TrendingItemTitle(
-            index = 1L,
+            index = 1,
             title = repository.name
         )
     }

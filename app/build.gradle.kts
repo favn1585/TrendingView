@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -43,6 +44,7 @@ android {
 
 dependencies {
     api(project(":domain"))
+    api(project(":repository"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -73,4 +75,17 @@ dependencies {
 
     // Coil
     implementation(libs.coil.compose)
+
+    // Paging
+    implementation(libs.androidx.paging.compose)
+
+    // Serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    // Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Insets
+    implementation(libs.accompanist.insets)
 }

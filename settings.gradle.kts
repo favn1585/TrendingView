@@ -22,3 +22,6 @@ dependencyResolutionManagement {
 rootProject.name = "TrendingView"
 include(":app")
 include(":domain")
+include(":network")
+include(":repository")
+include(":local")
