@@ -18,7 +18,7 @@ class TrendingRepositoriesPagingSource @Inject constructor(
         val size = params.key ?: 0
 
         val data = try {
-            getEventsUseCase.execute(
+            getEventsUseCase(
                 page = size / PAGE_SIZE + 1,
                 count = PAGE_SIZE
             )
@@ -27,10 +27,14 @@ class TrendingRepositoriesPagingSource @Inject constructor(
         }
 
         return if (data.isSuccess) {
+            val repositories = data.getOrNull() ?: emptyList()
+            val prevKey = if (size > 0) size - PAGE_SIZE else null
+            val nextKey = if (repositories.isNotEmpty()) size + PAGE_SIZE else null
+
             LoadResult.Page(
-                data = data.getOrNull() ?: emptyList(),
-                prevKey = size - PAGE_SIZE,
-                nextKey = size + PAGE_SIZE,
+                data = repositories,
+                prevKey = prevKey,
+                nextKey = nextKey,
             )
         } else {
             LoadResult.Error(IllegalStateException())

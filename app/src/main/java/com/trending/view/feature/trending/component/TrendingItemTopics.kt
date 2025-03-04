@@ -22,9 +22,12 @@ import kotlin.random.Random
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun TrendingItemTopics(
+    modifier: Modifier = Modifier,
     topics: List<String>
 ) {
-    FlowRow {
+    FlowRow(
+        modifier = modifier
+    ) {
         topics.forEach {
             Box(
                 modifier = Modifier.padding(end = 8.dp, bottom = 8.dp)
@@ -52,6 +55,7 @@ private fun TopicItem(
         Text(
             modifier = Modifier.padding(horizontal = 12.dp, vertical = 2.dp),
             color = MaterialTheme.colorScheme.onSecondary,
+            style = MaterialTheme.typography.bodySmall,
             text = text
         )
     }

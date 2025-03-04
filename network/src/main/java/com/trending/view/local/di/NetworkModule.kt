@@ -1,8 +1,8 @@
-package com.trending.view.network.di
+package com.trending.view.local.di
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.trending.view.network.api.GitHubApi
+import com.trending.view.local.api.GitHubApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

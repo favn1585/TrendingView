@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">TrendHub</string>
+    <string name="repository_title_prefix">github/</string>
     <string name="trending_repositories">Trending Repositories</string>
     <string name="issues">Issue: %s</string>
     <string name="watchers">Watch: %s</string>
     <string name="forks">Forks: %s</string>
     <string name="size">Size: %s</string>
+    <string name="set_dark_theme">Set dark theme</string>
+    <string name="set_system_theme">Set system theme</string>
 </resources>

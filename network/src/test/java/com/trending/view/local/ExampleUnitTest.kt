@@ -1,4 +1,4 @@
-package com.trending.view.network
+package com.trending.view.local
 
 import org.junit.Test
 

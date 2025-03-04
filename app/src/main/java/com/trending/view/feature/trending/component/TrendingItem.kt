@@ -1,6 +1,7 @@
 package com.trending.view.feature.trending.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -32,6 +33,7 @@ import com.trending.view.domain.entity.Repository
 import com.trending.view.ui.theme.TrendingViewTheme
 import com.trending.view.util.preview.DarkLightPreview
 import com.trending.view.util.preview.repository
+import com.trending.view.util.preview.toReadableFormat
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
@@ -45,75 +47,89 @@ fun TrendingItem(
             .background(MaterialTheme.colorScheme.background)
             .fillMaxWidth()
             .clickable { onClick() }
-            .padding(top = 16.dp)
     ) {
-        Row {
-            AsyncImage(
-                modifier = Modifier
-                    .size(32.dp)
-                    .clip(CircleShape),
-                model = repository.owner.avatarUrl,
-                contentDescription = null
-            )
-
-            Spacer(Modifier.width(8.dp))
-
-            TrendingItemTitle(
-                modifier = Modifier.align(Alignment.CenterVertically),
-                index = index,
-                title = repository.name
-            )
-        }
-
-        Spacer(Modifier.height(8.dp))
-
-        Text(
-            color = MaterialTheme.colorScheme.onBackground,
-            text = repository.description
-        )
-
-        if (repository.topics.isNotEmpty()) {
-            Spacer(Modifier.height(16.dp))
-            TrendingItemTopics(repository.topics)
-        }
-
-        Spacer(Modifier.height(8.dp))
-
-        HorizontalDivider(color = MaterialTheme.colorScheme.secondary, thickness = 1.dp)
-
         Spacer(Modifier.height(16.dp))
 
-        FlowRow {
+        Column(
+            modifier = Modifier
+                .padding(horizontal = 16.dp)
+                .fillMaxWidth()
+        ) {
+            Row {
+                AsyncImage(
+                    modifier = Modifier
+                        .size(40.dp)
+                        .clip(CircleShape)
+                        .border(
+                            width = 1.dp,
+                            color = MaterialTheme.colorScheme.secondary,
+                            shape = CircleShape
+                        ),
+                    model = repository.owner.avatarUrl,
+                    contentDescription = null
+                )
+
+                Spacer(Modifier.width(16.dp))
+
+                TrendingItemTitle(
+                    modifier = Modifier.align(Alignment.CenterVertically),
+                    index = index,
+                    title = repository.name
+                )
+            }
+
+            Spacer(Modifier.height(8.dp))
+
+            Text(
+                color = MaterialTheme.colorScheme.onBackground,
+                text = repository.description
+            )
+
+            if (repository.topics.isNotEmpty()) {
+                Spacer(Modifier.height(8.dp))
+                TrendingItemTopics(modifier = Modifier.fillMaxWidth(), topics = repository.topics)
+            }
+
+            Spacer(Modifier.height(8.dp))
+        }
+
+        FlowRow(
+            modifier = Modifier.padding(horizontal = 16.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
             repository.forks?.let {
                 TrendingInfoItem(
                     icon = R.drawable.ic_fork,
-                    text = it.toString()
+                    text = stringResource(R.string.forks, it.toReadableFormat())
                 )
             }
 
             repository.issues?.let {
                 TrendingInfoItem(
                     icon = R.drawable.ic_issue,
-                    text = stringResource(R.string.issues, it)
+                    text = stringResource(R.string.issues, it.toReadableFormat())
                 )
             }
 
             repository.watchers?.let {
                 TrendingInfoItem(
                     icon = R.drawable.ic_watcher,
-                    text = stringResource(R.string.watchers, it)
+                    text = stringResource(R.string.watchers, it.toReadableFormat())
                 )
             }
         }
 
-        Spacer(Modifier.height(8.dp))
-
-        HorizontalDivider(color = MaterialTheme.colorScheme.secondary, thickness = 1.dp)
-
         Spacer(Modifier.height(16.dp))
 
+        HorizontalDivider(
+            color = MaterialTheme.colorScheme.secondary.copy(alpha = 0.3f),
+            thickness = 1.dp
+        )
+
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
             horizontalArrangement = Arrangement.End
         ) {
             Icon(
@@ -132,8 +148,6 @@ fun TrendingItem(
                 text = stringResource(R.string.size, repository.size)
             )
         }
-
-        Spacer(Modifier.width(16.dp))
 
         HorizontalDivider(color = MaterialTheme.colorScheme.secondary, thickness = 1.dp)
     }

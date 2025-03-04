@@ -1,8 +1,9 @@
-package com.trending.view.network.repository
+package com.trending.view.local.repository
 
 import com.trending.view.domain.entity.Repository
-import com.trending.view.network.api.GitHubApi
-import com.trending.view.network.model.toDomain
+import com.trending.view.local.api.GitHubApi
+import com.trending.view.local.model.toDomain
+import timber.log.Timber
 import javax.inject.Inject
 
 class RemoteGitHubRepository @Inject constructor(
@@ -18,6 +19,7 @@ class RemoteGitHubRepository @Inject constructor(
                 val items = body()?.items?.map { it.toDomain() }.orEmpty()
                 return Result.success(items)
             } else {
+                Timber.e("Error: ${errorBody()}")
                 return Result.failure(Exception())
             }
         }

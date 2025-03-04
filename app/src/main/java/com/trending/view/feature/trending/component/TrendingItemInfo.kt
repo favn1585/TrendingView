@@ -27,9 +27,7 @@ fun TrendingInfoItem(
     @DrawableRes icon: Int,
     text: String
 ) {
-    Box(
-        modifier = Modifier.padding(end = 8.dp, bottom = 8.dp)
-    ) {
+    Box {
         Row(
             modifier = Modifier
                 .border(
@@ -54,6 +52,7 @@ fun TrendingInfoItem(
             Text(
                 color = MaterialTheme.colorScheme.secondary,
                 fontWeight = FontWeight.Medium,
+                style = MaterialTheme.typography.bodyMedium,
                 text = text
             )
         }

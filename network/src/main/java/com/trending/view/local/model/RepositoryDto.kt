@@ -1,4 +1,4 @@
-package com.trending.view.network.model
+package com.trending.view.local.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -17,15 +17,15 @@ data class RepositoryDto(
     @Json(name = "description")
     val description: String?,
     @Json(name = "forks_count")
-    val forksCount: Int,
+    val forksCount: Long,
     @Json(name = "open_issues_count")
-    val openIssuesCount: Int,
+    val openIssuesCount: Long,
     @Json(name = "topics")
     val topics: List<String>?,
     @Json(name = "size")
     val size: Int,
     @Json(name = "watchers")
-    val watchers: Int,
+    val watchers: Long,
 )
 
 fun RepositoryDto.toDomain() = Repository(

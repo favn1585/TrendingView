@@ -10,8 +10,8 @@ data class Repository(
     val description: String,
     val topics: List<String>,
     val size: Int,
-    val forks: Int?,
-    val issues: Int?,
-    val watchers: Int?,
+    val forks: Long?,
+    val issues: Long?,
+    val watchers: Long?,
     val htmlUrl: String,
 )

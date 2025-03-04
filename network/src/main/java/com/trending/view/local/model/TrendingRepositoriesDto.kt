@@ -1,4 +1,4 @@
-package com.trending.view.network.model
+package com.trending.view.local.model
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

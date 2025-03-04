@@ -1,6 +1,6 @@
-package com.trending.view.network.api
+package com.trending.view.local.api
 
-import com.trending.view.network.model.TrendingRepositoriesDto
+import com.trending.view.local.model.TrendingRepositoriesDto
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query

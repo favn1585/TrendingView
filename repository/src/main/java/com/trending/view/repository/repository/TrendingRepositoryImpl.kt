@@ -1,7 +1,7 @@
 package com.trending.view.repository.repository
 
 import com.trending.view.domain.repository.TrendingRepository
-import com.trending.view.network.repository.RemoteGitHubRepository
+import com.trending.view.local.repository.RemoteGitHubRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
